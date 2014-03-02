@@ -1,4 +1,1 @@
-rolling
-=======
-
-avoscloud - rolling (words practice program)
+Cloud code project for rolling_gre. https://cn.avoscloud.com/docs/cloud_code_guide.html
