@@ -16,8 +16,9 @@ AV.Cloud.define("leadboard", function(request, response) {
 				var score = results[i].get("last_3_month");
 				var user_id = results[i].get("user_uuid");
 				var rank = i;
+				var is_self = (user_id == current_uuid);
 				stars.push({
-					"is_self": user_id == current_uuid, 
+					"is_self": is_self,
 					"rank": rank, 
 					"last_3_month": score
 				});
