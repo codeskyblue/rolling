@@ -5,8 +5,9 @@ var _ = require("underscore");
 
 AV.Cloud.define("leadboard", function(request, response) {
 	var query = new AV.Query("Activity");
-	query.equalTo("city", request.params.city);
-	//query.equalTo("objectId", "5312b6bee4b0ae449c68d7d2");
+	var current_uuid = request.params.user_uuid;
+	var city = request.params.city;
+	query.equalTo("city", city);
 	query.find({
 		success: function(results) {
 			var stars = [];
@@ -15,7 +16,11 @@ AV.Cloud.define("leadboard", function(request, response) {
 				var score = results[i].get("last_3_month");
 				var user_id = results[i].get("user_uuid");
 				var rank = i;
-				stars.push({"is_self": user_id == 1, "rank": rank, "last_3_month": score});
+				stars.push({
+					"is_self": user_id == current_uuid, 
+					"rank": rank, 
+					"last_3_month": score
+				});
 			}
 			// sort
 			var rank_scores = _.sortBy(stars, function(item){ 
