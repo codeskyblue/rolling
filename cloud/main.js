@@ -1,6 +1,6 @@
 // Use AV.Cloud.define to define as many cloud functions as you want.
 // For example:
-AV.Cloud.define("hello", function(request, response) {
+AV.Cloud.define("leadboard", function(request, response) {
 	var query = new AV.Query("Activity");
 	query.equalTo("city", request.params.city);
 	//query.equalTo("objectId", "5312b6bee4b0ae449c68d7d2");
@@ -23,7 +23,7 @@ AV.Cloud.define("hello", function(request, response) {
 	//response.success("Hello world!" + request.params.city);
 });
 
-AV.Cloud.define("leadboard", function(request, response) {
+AV.Cloud.define("hello", function(request, response) {
 	/* user_uuid, number, city_str */
 	/* rank, score */
 	response.success("!!!ksdjflksdjfksj Hello world!");
