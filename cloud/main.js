@@ -8,6 +8,8 @@ AV.Cloud.define("leadboard", function(request, response) {
 	var current_uuid = request.params.user_uuid;
 	var city = request.params.city;
 	query.equalTo("city", city);
+	query.descending("updatedAt");
+	var visits = {};
 	query.find({
 		success: function(results) {
 			var stars = [];
@@ -16,13 +18,17 @@ AV.Cloud.define("leadboard", function(request, response) {
 				var score = results[i].get("last_3_month");
 				var user_id = results[i].get("user_uuid");
 				var rank = i;
-				var is_self = (user_id == current_uuid);
+				var is_self = (user_id === current_uuid);
+				if (visits[user_id]) {
+					continue;
+				}
+				visits[user_id] = true;
 				stars.push({
 					"is_self": is_self,
 					"rank": rank, 
 					"last_3_month": score
 				});
-			}
+			};
 			// sort
 			var rank_scores = _.sortBy(stars, function(item){ 
 				return -1 * parseInt(item.last_3_month); 
